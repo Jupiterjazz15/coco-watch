@@ -38,6 +38,12 @@ gem "jbuilder"
 # Devise gem
 gem "devise"
 
+# Nokogiri gem
+gem  "nokogiri"
+
+# https://github.com/faker-ruby/faker?tab=readme-ov-file#generators
+gem 'faker'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
