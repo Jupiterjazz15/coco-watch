@@ -12,14 +12,14 @@ class WatchesController < ApplicationController
   end
 
   def create
-    @watch = Watch(params_watch)
+    @watch = Watch.create(params_watch)
       if @watch.save
-        redirect_to watch_path(@booking)
+        redirect_to watch_path(@watch)
       else
         render :new, status: :unprocessable_entity
       end
   end
-
+  
 private
 
 def params_watch
