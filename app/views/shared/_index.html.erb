@@ -1,0 +1,17 @@
+  <div class="flexbox">
+    <% @watches.each do |watch| %>
+      <div class="card rounded">
+        <%= link_to(watches_show_path) do %>
+          <%= image_tag(watch.url) %>
+        <% end %>
+        <div class="d-flex justify-content-between d-flex align-items-center">
+          <%= watch.brand.upcase %>
+          <div style="height:30px"></div>
+          <%= watch.price_per_day %> €
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="my-1">
+    <%= link_to "Create", watches_create_path(@watches), data: {turbo_method: :create, turbo_confirm: "OK to Create a new Watch?"}, class: "btn btn-primary mx-1"%>
+  </div>
