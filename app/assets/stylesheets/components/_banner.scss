@@ -2,6 +2,9 @@
   background-size: cover;
   background-position: center;
   padding: 150px 3em;
+  position: absolute;
+  width: 100vw;
+  left: calc(-50vw + 50%);
 
   h1 {
     margin: 0;
