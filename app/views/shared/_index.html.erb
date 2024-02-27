@@ -1,15 +1,21 @@
 <div class="flexbox">
   <% @watches.each do |watch| %>
     <div class="card shadow">
-        <%= link_to(watches_show_path) do %>
-          <%= image_tag watch.url, class:"card_img rounded" %>
-        <% end %>
+        <div class="card_height">
+          <%= link_to(watch_path(watch)) do %>
+            <% if watch.photo.attached? %>
+              <%= cl_image_tag watch.photo.key, class: "card_img" %>
+            <% else %>
+              <%= image_tag "https://rb.gy/c98mip", class:"card_img" %>
+            <% end %>
+          <% end %>
+        </div>
       <div class="d-flex justify-content-between d-flex align-items-center text_display">
         <%= watch.brand.upcase %>
-      <div style="height:30px"></div>
+        <div style="height:30px"></div>
         <%= watch.price_per_day %> €
       </div>
-      <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex justify-content-between d-flex align-items-center text_display mb-2">
         <%= link_to edit_watch_path(watch), class: "btn btn-primary" do %>
           <i class="fas fa-edit"></i> Edit
         <% end %>

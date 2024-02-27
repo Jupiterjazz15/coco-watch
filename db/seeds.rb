@@ -11,15 +11,18 @@ require 'faker'
 #   end
 Watch.destroy_all
 
+User.create(email: "james@example.com", password: "password")
+
 4.times do
   Watch.create(
     brand: Faker::Commerce.brand,
+    year: 1900,
     model: Faker::Vehicle.model,
     price_per_day: Faker::Commerce.price,
     description: Faker::Lorem.sentence(word_count: 4),
     url: Faker::LoremFlickr.image,
     available_from: Faker::Time.forward(days: 23, period: :morning),
     available_until: Faker::Time.backward(days: 14, period: :evening),
-    user_id: 1
+    user_id: User.first.id
   )
 end
