@@ -34,7 +34,7 @@ class WatchesController < ApplicationController
   end
 
   def destroy
-    @watch.destroy
+    @watch.delete
     redirect_to watches_path
   end
 
