@@ -8,8 +8,11 @@ class BookingsController < ApplicationController
     @booking = Booking.new(bookings_params)
     @watch = Watch.find(params[:watch_id])
     @booking.watch = @watch
-    if booking.save
+    @booking.user = current_user
+    @booking.total_price = ((@booking.end_date.to_date - @booking.start_date.to_date).to_i + 1) * @watch.price_per_day
+    if @booking.save
       redirect_to watch_path(@watch)
+      flash[:notice] = "Votre location est en cours de validation"
     else
       render :new, :status, :unprocessable_entity
     end
@@ -18,6 +21,6 @@ class BookingsController < ApplicationController
   private
 
   def bookings_params
-    params.require(@booking).permit(:start_date, :end_date, :total_price, :booking_status, :user_id, :watch_id)
+    params.require(:booking).permit(:start_date, :end_date, :watch_id)
   end
 end
