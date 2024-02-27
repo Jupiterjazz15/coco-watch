@@ -1,0 +1,50 @@
+.container {
+  background-color: #FFFFFF;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  border-radius: 4px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+
+  .watch-title {
+    display: flex;
+    align-items: flex-end;
+    padding-top: 2em;
+  }
+
+  .watch-title p {
+    margin-bottom: 11px;
+    margin-left: 1em;
+  }
+
+}
+
+.watch-price {
+  margin-left: auto;
+}
+
+.watch-content {
+  display: flex;
+
+  .watch-img {
+    margin-right: 1em;
+    margin-bottom: 1em;
+  }
+}
+
+.btn-book {
+  margin-left: auto;
+  margin-top: auto;
+  margin-bottom: 1em;
+}
+
+
+
+// .container .watch-info {
+//   height: 100%;
+//   width: 120px;
+//   object-fit: cover;
+// }
+
+// .btn-book {
+//   align-items: start;
+// }

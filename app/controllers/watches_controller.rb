@@ -13,7 +13,8 @@ class WatchesController < ApplicationController
   end
 
   def create
-    @watch = Watch.create(watch_params)
+    @watch = Watch.new(watch_params)
+    @watch.user = current_user
     if @watch.save
       redirect_to watch_path(@watch)
     else
@@ -34,7 +35,7 @@ class WatchesController < ApplicationController
   end
 
   def destroy
-    @watch.destroy
+    @watch.delete
     redirect_to watches_path
   end
 
@@ -45,6 +46,6 @@ class WatchesController < ApplicationController
   end
 
   def watch_params
-    params.require(:watch).permit(:brand, :status, :model, :url, :description, :year, :price_per_day, :availabe_for, :available_until, :user_id)
+    params.require(:watch).permit(:brand, :model, :photo, :description, :year, :price_per_day, :available_from, :available_until)
   end
 end

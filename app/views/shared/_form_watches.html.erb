@@ -1,0 +1,15 @@
+<div class="container pt-2">
+  <div class="border border-secondary-subtle p-3 rounded">
+    <%= simple_form_for(watch) do |f| %>
+      <%= f.input :brand, label: false, placeholder: "brand" %>
+      <%= f.input :photo, as: :file, label: false, placeholder: "image" %>
+      <%= f.input :model, label: false, placeholder: "model" %>
+      <%= f.input :description, label: false, placeholder: "description" %>
+      <%= f.input :year, label: false, placeholder: "year" %>
+      <%= f.input :price_per_day, label: false, placeholder: "price" %>
+      <%= f.input :available_from, label: false, placeholder: "date" %>
+      <%= f.input :available_until,label: false, placeholder: "date" %>
+      <%= f.submit class: "btn btn-success" %>
+    <% end %>
+  </div>
+</div>
