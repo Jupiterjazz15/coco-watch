@@ -2,25 +2,20 @@
 @import "home";
 
 .flexbox {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   justify-content: space-between;
   grid-gap: 16px;
-  padding: 1em;
-  width: 100%;
+  justify-self: auto;
+  padding-top: 1em;
 }
 
+.card_img {
+  width: 100%;
+  padding: 4px;
+}
 
-
-// .navbar-lewagon {
-  // justify-content: space-between;
-  // background: white;
-// }
-//
-// .navbar-lewagon .navbar-collapse {
-  // flex-grow: 0;
-// }
-//
-// .navbar-lewagon .navbar-brand img {
-  // width: 40px;
-// }
-//
+.text_display {
+  margin-left: 4px;
+  margin-right: 4px;
+}
