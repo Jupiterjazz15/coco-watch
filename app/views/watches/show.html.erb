@@ -1,2 +1,28 @@
-<h1>Watches#show</h1>
-<p>Find me in app/views/watches/show.html.erb</p>
+<div class="container">
+  <div class="watch-title">
+    <h1><%= @watch.brand %></h1>
+    <p><%= @watch.model %></p>
+
+    <div class="watch-price">
+      <h3>$<strong><%= @watch.price_per_day %></strong></h3>
+    </div>
+  </div>
+
+  <div class="watch-content">
+
+    <div class="watch-img">
+      <img src="<%= @watch.url %>" alt="watch_image">
+    </div>
+
+    <div class="watch-description">
+      <h4><strong>Watch description :</strong></h4>
+      <p><%= @watch.description %></p>
+    </div>
+
+    <div class="btn-book">
+      <button class="btn btn-dark rounded">Book</button>
+    </div>
+
+
+  </div>
+</div>
