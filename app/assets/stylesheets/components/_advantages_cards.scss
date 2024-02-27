@@ -2,6 +2,8 @@
   overflow: hidden;
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius:4px;
+  height: 100%;
 
   img {
     height: 80%;
@@ -15,21 +17,15 @@
   margin: 0;
 }
 
-.card-trip p {
-  font-size: 12px;
-  opacity: .7;
-  margin: 0;
-}
 
-
-.card-trip .card-trip-infos {
+.card-trip-infos {
   padding: 16px;
   justify-content: space-between;
   align-items: flex-end;
-}
 
-.card-trip-infos .card-trip-user {
-  right: 16px;
-  top: -20px;
-  width: 40px;
+  p {
+    font-size: 12px;
+    opacity: .7;
+    margin: 0;
+  }
 }
