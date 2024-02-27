@@ -1,17 +1,24 @@
-  <div class="flexbox">
+  <div class="flexbox mt-3">
     <% @watches.each do |watch| %>
       <div class="card shadow">
-        <%= link_to(watches_show_path) do %>
-          <%= image_tag watch.url, class:"card_img rounded" %>
-        <% end %>
-        <div class="d-flex justify-content-between d-flex align-items-center text_display">
-          <%= watch.brand.upcase %>
-          <div style="height:30px"></div>
-          <%= watch.price_per_day %> €
+        <div class="card_height">
+          <%= link_to(watch_path(watch)) do %>
+            <% if watch.photo.attached? %>
+              <%= cl_image_tag watch.photo.key, class: "card_img" %>
+            <% else %>
+              <%= image_tag "https://rb.gy/c98mip", class:"card_img" %>
+            <% end %>
+          <% end %>
         </div>
+          <div class="d-flex justify-content-between d-flex align-items-center text_display">
+            <%= watch.brand.upcase %>
+          <div class="text_heigh">
+          </div>
+            <%= watch.price_per_day %> €
+          </div>
       </div>
     <% end %>
   </div>
   <div class="my-2">
-    <%= link_to "Create", watches_create_path(@watches), data: {turbo_method: :create, turbo_confirm: "OK to Create a new Watch?"}, class: "btn btn-primary"%>
+    <%= link_to "Create", new_watch_path, class: "btn btn-primary"%>
   </div>
