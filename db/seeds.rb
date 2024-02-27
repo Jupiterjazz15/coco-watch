@@ -17,7 +17,7 @@ Watch.destroy_all
     model: Faker::Vehicle.model,
     price_per_day: Faker::Commerce.price,
     description: Faker::Lorem.sentence(word_count: 4),
-    url: Faker::LoremFlickr.image(size: "50x60"),
+    url: Faker::LoremFlickr.image,
     available_from: Faker::Time.forward(days: 23, period: :morning),
     available_until: Faker::Time.backward(days: 14, period: :evening),
     user_id: 1
