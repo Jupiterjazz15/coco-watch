@@ -1,41 +1,41 @@
 <div class="container">
-  <div class="watch-title">
-    <h1><%= @watch.brand %></h1>
-    <p><%= @watch.model %></p>
+  <div class="watch-card d-block">
+    <div class="title">
+      <div class="watch-title">
+        <h1><%= @watch.brand %></h1>
+        <p><%= @watch.model %></p>
 
-    <div class="watch-price">
-      <h3>$<strong><%= @watch.price_per_day %></strong></h3>
+        <div class="watch-price">
+          <h3>$<strong><%= @watch.price_per_day %></strong></h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="watch-content d-flex">
+      <div class="watch-img">
+        <img src="<%= @watch.url %>" alt="watch_image">
+      </div>
+
+      <div class="watch-description">
+        <h4><strong>Watch description :</strong></h4>
+        <p><%= @watch.description %></p>
+      </div>
     </div>
   </div>
 
-  <div class="watch-content">
+  <div class="form-book">
+    <h2>Booking :</h2>
+    <% if @watch.user != current_user %>
+      <%= simple_form_for [@watch, @booking], data: { controller: "datepicker" } do |f| %>
+        <div class="form-inputs">
+          <%= f.input :start_date, as: :string, input_html: { data: { datepicker_target: "startTime" } } %>
+          <%= f.input :end_date, as: :string, input_html: { data: { datepicker_target: "endTime" } }%>
+        </div>
 
-    <div class="watch-img">
-      <img src="<%= @watch.url %>" alt="watch_image">
-    </div>
-
-    <div class="watch-description">
-      <h4><strong>Watch description :</strong></h4>
-      <p><%= @watch.description %></p>
-    </div>
-
-    <div class="btn-book">
-      <button class="btn btn-dark rounded">Book</button>
-    </div>
+        <div class="form-actions rounded px-1em text-center text-white">
+          <%= f.button :submit %>
+        </div>
+      <% end %>
+    <% end %>
   </div>
 </div>
-
-<% if @watch.user != current_user %>
-  <%= simple_form_for [@watch, @booking], data: { controller: "datepicker" } do |f| %>
-    <div class="form-inputs">
-      <%#= f.label :start_date, "Date de début de la location" %>
-      <%= f.input :start_date, as: :string, input_html: { data: { datepicker_target: "startTime" } } %>
-      <%#= f.label :end_date, "Date de fin de la location" %>
-      <%= f.input :end_date, as: :string, input_html: { data: { datepicker_target: "endTime" } }%>
-    </div>
-
-    <div class="form-actions">
-      <%= f.button :submit %>
-    </div>
-  <% end %>
-<% end %>
