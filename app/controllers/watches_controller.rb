@@ -36,7 +36,7 @@ class WatchesController < ApplicationController
 
   def destroy
     @watch.delete
-    redirect_to watches_path
+    redirect_to dashboard_path
   end
 
   private

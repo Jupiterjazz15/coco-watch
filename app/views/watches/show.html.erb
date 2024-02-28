@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-1">
   <div class="watch-card d-block">
     <div class="title">
       <div class="watch-title">
@@ -13,7 +13,7 @@
 
     <div class="watch-content d-flex">
       <div class="watch-img">
-        <img src="<%= @watch.url %>" alt="watch_image">
+        <img src="<%= @watch.url %>" alt="watch_image" width="200px">
       </div>
 
       <div class="watch-description">
@@ -24,8 +24,8 @@
   </div>
 
   <div class="form-book">
-    <h2>Booking :</h2>
     <% if @watch.user != current_user %>
+    <h2>Booking :</h2>
       <%= simple_form_for [@watch, @booking], data: { controller: "datepicker" } do |f| %>
         <div class="form-inputs">
           <%= f.input :start_date, as: :string, input_html: { data: { datepicker_target: "startTime" } } %>

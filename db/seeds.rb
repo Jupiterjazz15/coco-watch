@@ -22,7 +22,7 @@ User.create(email: "antoine@test.com", password: "azertyuiop")
     model: Faker::Vehicle.model,
     price_per_day: Faker::Commerce.price,
     description: Faker::Lorem.sentence(word_count: 4),
-    url: Faker::LoremFlickr.image,
+    url: "https://rb.gy/c98mip",
     available_from: Faker::Time.forward(days: 23, period: :morning),
     available_until: Faker::Time.backward(days: 14, period: :evening),
     user_id: User.first.id
