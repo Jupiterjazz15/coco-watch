@@ -1,27 +1,26 @@
-<div class="container-1">
+<div class="watch-card-container">
+  <div class="watch-img">
+    <img src="<%= @watch.url %>" alt="watch_image" width="200px">
+  </div>
+
   <div class="watch-card d-block">
     <div class="title">
       <div class="watch-title">
         <h1><%= @watch.brand %></h1>
         <p><%= @watch.model %></p>
-
-        <div class="watch-price">
-          <h3>$<strong><%= @watch.price_per_day %></strong></h3>
-        </div>
       </div>
     </div>
 
-    <div class="watch-content d-flex">
-      <div class="watch-img">
-        <img src="<%= @watch.url %>" alt="watch_image" width="200px">
-      </div>
-
-      <div class="watch-description">
-        <h4><strong>Watch description :</strong></h4>
-        <p><%= @watch.description %></p>
-      </div>
+    <div class="watch-description">
+      <h4>Watch description :</h4>
+      <p><%= @watch.description %></p>
     </div>
+
   </div>
+    <div class="watch-price d-flex">
+      <h3>$<strong><%= @watch.price_per_day %></strong></h3>
+      <p>/day</p>
+    </div>
 
   <div class="form-book">
     <% if @watch.user != current_user %>
