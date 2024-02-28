@@ -18,7 +18,8 @@ class WatchesController < ApplicationController
     if @watch.save
       redirect_to dashboard_path
     else
-      render :new, status: :unprocessable_entity
+      @error = true
+      render params[:watch][:controller_action], status: :unprocessable_entity
     end
   end
 
