@@ -224,3 +224,12 @@ Watch.create(
   available_until: Faker::Time.backward(days: 14, period: :evening),
   user_id: User.first.id
 )
+users_data = [
+  { first_name: "Alice", last_name: "Johnson", phone_number: "123-456-7890", avatar: "https://www.w3schools.com/howto/img_avatar.png", email: "test6@test.com", password: "testpassword" },
+  { first_name: "Bob", last_name: "Smith", phone_number: "234-567-8901", avatar: "https://www.w3schools.com/howto/img_avatar2.png", email: "test7@test.com", password: "testpassword" },
+  { first_name: "Carol", last_name: "Davis", phone_number: "345-678-9012", avatar: "https://www.w3schools.com/w3images/avatar6.png", email: "test8@test.com", password: "testpassword" },
+  { first_name: "Dave", last_name: "Wilson", phone_number: "456-789-0123", avatar: "https://www.w3schools.com/w3images/avatar2.png", email: "test9@test.com", password: "testpassword" }
+]
+users_data.each do |user_data|
+  User.create!(user_data)
+end
