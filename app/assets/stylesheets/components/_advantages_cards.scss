@@ -1,31 +1,53 @@
+.banner h1, .banner p {
+  color: white; /* Ensures text is readable against the dark gradient */
+}
+
 .card-trip {
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 8px;
   overflow: hidden;
-  background: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  border-radius:4px;
-  height: 100%;
-
-  img {
-    height: 80%;
-    width: 80%;
-  }
+  margin-bottom: 20px;
 }
 
-.card-trip h2 {
-  font-size: 16px;
-  font-weight: bold;
-  margin: 0;
+.card-trip img {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #f0f0f0;
 }
-
 
 .card-trip-infos {
-  padding: 16px;
-  justify-content: space-between;
-  align-items: flex-end;
+  padding: 15px;
+  font-family: 'Arial', sans-serif;
+}
 
-  p {
-    font-size: 12px;
-    opacity: .7;
-    margin: 0;
-  }
+.card-trip-infos h2 {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.card-trip-infos ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.card-trip-infos ul li {
+  margin-bottom: 5px;
+  padding-left: 30px;
+  position: relative;
+}
+
+.btn-flat.btn-dark.rounded {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-flat.btn-dark.rounded:hover {
+  background-color: #555;
 }
