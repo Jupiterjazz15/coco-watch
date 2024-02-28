@@ -1,6 +1,6 @@
 <div class="flexbox">
   <% @watches.each do |watch| %>
-    <div class="card shadow">
+    <div class="card card_border shadow">
         <div class="card_height">
           <%= link_to(watch_path(watch)) do %>
             <% if watch.photo.attached? %>
@@ -11,17 +11,18 @@
           <% end %>
         </div>
       <div class="d-flex justify-content-between d-flex align-items-center text_display">
-        <%= watch.brand.upcase %>
-        <div style="height:30px"></div>
-        <%= watch.price_per_day %> €
-      </div>
-      <div class="d-flex justify-content-between d-flex align-items-center text_display mb-2">
-        <%= link_to edit_watch_path(watch), class: "btn btn-primary" do %>
-          <i class="fas fa-edit"></i> Edit
-        <% end %>
-        <%= link_to watch_path(watch), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" do %>
-          <i class="fas fa-trash-alt"></i> Delete
-        <% end %>
+        <div class="d-flex flex-column">
+          <div class="text_brand" >
+            <%= watch.brand.upcase %>
+          </div>
+          <div class="text_model" >
+            <%= watch.model %>
+          </div>
+        </div>
+          <div style="height:30px"></div>
+        <div class="price_style">
+          <%= watch.price_per_day %><strong> €</strong>
+        </div>
       </div>
     </div>
   <% end %>

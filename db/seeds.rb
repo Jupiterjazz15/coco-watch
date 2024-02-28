@@ -9,11 +9,13 @@ require 'faker'
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+Booking.destroy_all
 Watch.destroy_all
 
 User.create(email: "james@example.com", password: "password")
+User.create(email: "antoine@test.com", password: "azertyuiop")
 
-4.times do
+20.times do
   Watch.create(
     brand: Faker::Commerce.brand,
     year: 1900,
