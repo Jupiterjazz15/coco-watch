@@ -25,15 +25,17 @@
   </div>
 </div>
 
-<%= simple_form_for [@watch, @booking], data: { controller: "datepicker" } do |f| %>
-  <div class="form-inputs">
-    <%#= f.label :start_date, "Date de début de la location" %>
-    <%= f.input :start_date, as: :string, input_html: { data: { datepicker_target: "startTime" } } %>
-    <%#= f.label :end_date, "Date de fin de la location" %>
-    <%= f.input :end_date, as: :string, input_html: { data: { datepicker_target: "endTime" } }%>
-  </div>
+<% if @watch.user != current_user %>
+  <%= simple_form_for [@watch, @booking], data: { controller: "datepicker" } do |f| %>
+    <div class="form-inputs">
+      <%#= f.label :start_date, "Date de début de la location" %>
+      <%= f.input :start_date, as: :string, input_html: { data: { datepicker_target: "startTime" } } %>
+      <%#= f.label :end_date, "Date de fin de la location" %>
+      <%= f.input :end_date, as: :string, input_html: { data: { datepicker_target: "endTime" } }%>
+    </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+    <div class="form-actions">
+      <%= f.button :submit %>
+    </div>
+  <% end %>
 <% end %>
