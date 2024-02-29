@@ -9,7 +9,7 @@
             <% if booking.watch.photo.attached? %>
               <%= cl_image_tag booking.watch.photo.key, class: "card-img-top" %>
             <% else %>
-              <%= image_tag "https://rb.gy/c98mip", class: "card-img-top" %>
+              <%= image_tag watch.url, class: "card-img-top" %>
             <% end %>
           <% end %>
           <h5 class="card-title mt-3"><%= booking.watch.brand.upcase %></h5>
@@ -33,7 +33,7 @@
             <% if watch.photo.attached? %>
               <%= cl_image_tag watch.photo.key, class: "card-img-top" %>
             <% else %>
-              <%= image_tag "https://rb.gy/c98mip", class: "card-img-top" %>
+              <%= image_tag watch.url, class: "card-img-top" %>
             <% end %>
           <% end %>
           <h5 class="card-title mt-3"><%= watch.brand.upcase %></h5>

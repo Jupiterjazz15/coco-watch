@@ -1,4 +1,4 @@
-<div class="container-1">
+<div class="container-1 d-flex flex-column">
   <div class="watch-card d-block">
     <div class="title">
       <div class="watch-title">
@@ -12,9 +12,18 @@
     </div>
 
     <div class="watch-content d-flex">
-      <div class="watch-img">
-        <img src="<%= @watch.url %>" alt="watch_image" width="200px">
+      <div class="card card_border shadow">
+        <div class="card_height">
+          <%= link_to(watch_path(@watch)) do %>
+            <% if @watch.photo.attached? %>
+              <%= cl_image_tag @watch.photo.key, class: "card_img" %>
+            <% else %>
+              <%= image_tag @watch.url, class:"card_img" %>
+            <% end %>
+          <% end %>
+        </div>
       </div>
+    </div>
 
       <div class="watch-description">
         <h4><strong>Watch description :</strong></h4>
@@ -22,7 +31,13 @@
       </div>
     </div>
   </div>
-
+  <div>
+    <div style="width: 250px; height: 200px;"
+      data-controller="map"
+      data-map-markers-value="<%= @markers.to_json %>"
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+    </div>
+  </div>
   <div class="form-book">
     <% if @watch.user != current_user %>
     <h2>Booking :</h2>
@@ -31,7 +46,6 @@
           <%= f.input :start_date, as: :string, input_html: { data: { datepicker_target: "startTime" } } %>
           <%= f.input :end_date, as: :string, input_html: { data: { datepicker_target: "endTime" } }%>
         </div>
-
         <div class="form-actions rounded px-1em text-center text-white">
           <%= f.button :submit %>
         </div>

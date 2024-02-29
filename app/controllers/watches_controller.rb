@@ -2,6 +2,14 @@ class WatchesController < ApplicationController
   before_action :set_watch, only: %i[show edit update destroy]
   def index
     @watches = Watch.all
+    @markers = @watches.geocoded.map do |watch|
+      {
+        lat: watch.latitude,
+        lng: watch.longitude,
+        marker_html: render_to_string(partial: "marker", locals: { watch: watch }),
+        info_window_html: render_to_string(partial: "info_window", locals: { watch: watch })
+      }
+    end
   end
 
   def new
@@ -10,7 +18,16 @@ class WatchesController < ApplicationController
 
   def show
     @booking = Booking.new
-  end
+    if @watch.geocoded?
+      @markers = [
+        {
+          lat: @watch.latitude,
+          lng: @watch.longitude,
+          marker_html: render_to_string(partial: "marker", locals: { watch: @watch }),
+          info_window_html: render_to_string(partial: "info_window", locals: { watch: @watch })
+        }]
+      end
+    end
 
   def create
     @watch = Watch.new(watch_params)
@@ -46,6 +63,6 @@ class WatchesController < ApplicationController
   end
 
   def watch_params
-    params.require(:watch).permit(:brand, :model, :photo, :description, :year, :price_per_day, :available_from, :available_until)
+    params.require(:watch).permit(:brand, :model, :photo, :description, :address, :year, :price_per_day, :available_from, :available_until)
   end
 end
