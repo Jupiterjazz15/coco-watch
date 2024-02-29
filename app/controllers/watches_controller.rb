@@ -26,9 +26,10 @@ class WatchesController < ApplicationController
           lng: @watch.longitude,
           marker_html: render_to_string(partial: "marker", locals: { watch: @watch }),
           info_window_html: render_to_string(partial: "info_window", locals: { watch: @watch })
-        }]
-      end
+        }
+      ]
     end
+  end
 
   def create
     @watch = Watch.new(watch_params)
