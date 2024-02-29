@@ -1,22 +1,26 @@
 <div class="container pt-2 pb-2">
   <div class="p-3 rounded">
-    <%= simple_form_for (@watch), data: { controller: "datepicker" } do |f| %>
-    <div class="form-inputs">
-      <%= f.input :brand, label: false, placeholder: "brand" %>
-      <%= f.input :photo, as: :file, label: false, placeholder: "image" %>
-      <%= f.input :model, label: false, placeholder: "model" %>
-      <%= f.input :description, label: false, placeholder: "description" %>
-      <%= f.input :year, label: false, placeholder: "year" %>
-      <%= f.input :price_per_day, label: false, placeholder: "price" %>
-      <%= f.input :address, label: false, placeholder: "address" %>
-      <%= f.input :available_from, as: :string, input_html: { data: { datepicker_target: "startTime" } } %>
-      <%= f.input :available_until, as: :string, input_html: { data: { datepicker_target: "endTime" } } %>
-    <% if local_assigns[:for_watch] %>
-      <%= f.submit class: "btn btn-outline-secondary" %>
-      <% else %>
-      <%= f.submit class: "btn btn-dark" %>
-    </div>
+    <%= simple_form_for (@watch),
+                        data: {
+                          controller: "datepicker",
+                          action: "submit->watch-form#submit",
+                          watch_form_target: "form"
+                        } do |f| %>
+      <div class="form-inputs">
+        <%= f.input :brand, label: false, placeholder: "brand" %>
+        <%= f.input :photo, as: :file, label: false, placeholder: "image" %>
+        <%= f.input :model, label: false, placeholder: "model" %>
+        <%= f.input :description, label: false, placeholder: "description" %>
+        <%= f.input :year, label: false, placeholder: "year" %>
+        <%= f.input :price_per_day, label: false, placeholder: "price" %>
+        <%= f.input :available_from, as: :string, input_html: { data: { datepicker_target: "startTime" } } %>
+        <%= f.input :available_until, as: :string, input_html: { data: { datepicker_target: "endTime" } } %>
+        <% if local_assigns[:for_watch] %>
+          <%= f.submit class: "btn btn-outline-secondary" %>
+          <% else %>
+          <%= f.submit class: "btn btn-dark" %>
+        <% end %>
+      </div>
     <% end %>
-  <% end %>
   </div>
 </div>

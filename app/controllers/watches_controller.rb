@@ -32,10 +32,23 @@ class WatchesController < ApplicationController
   def create
     @watch = Watch.new(watch_params)
     @watch.user = current_user
-    if @watch.save
-      redirect_to dashboard_path(section: 'watches')
-    else
-      render :new, status: :unprocessable_entity
+    
+    respond_to do |format|
+      if @watch.save
+        format.html { redirect_to dashboard_path(section: 'watches') }
+        format.json do
+          render json: {
+            html: render_to_string(partial: 'shared/watch_created', locals: { watch: @watch }, formats: [:html])
+          }
+        end
+      else
+        format.html { render :new }
+        format.json do
+          render json: {
+            html: render_to_string(partial: 'shared/form_watches', locals: { watch: @watch }, formats: [:html])
+          }
+        end
+      end
     end
   end
 
