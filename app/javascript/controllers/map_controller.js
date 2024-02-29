@@ -11,13 +11,10 @@ export default class extends Controller {
       mapboxgl.accessToken = this.apiKeyValue
       this.map = new mapboxgl.Map({
       container: this.element,
-      style: "mapbox://styles/mapbox/streets-v10"
+      style: "mapbox://styles/mapbox/navigation-night-v1"
     })
       this.#addMarkersToMap()
       this.#fitMapToMarkers()
-      this.map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,
-      mapboxgl: mapboxgl })
-    )
   }
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
@@ -34,6 +31,7 @@ export default class extends Controller {
       .addTo(this.map)
     })
   }
+
   #fitMapToMarkers() {
     const bounds = new mapboxgl.LngLatBounds()
     this.markersValue.forEach(marker => bounds.extend([ marker.lng, marker.lat ]))
