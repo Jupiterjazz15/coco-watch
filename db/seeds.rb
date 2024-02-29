@@ -1,4 +1,5 @@
 require 'faker'
+require 'open-uri'
 
 # This file should ensure the existence of records required to run the application in every environment (production,
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
@@ -31,21 +32,24 @@ addresses = ["12 Rue de Rivoli, Paris, France", "34 Avenue des Champs-Élysées,
 descriptions = ["Luxury dive watch", "Classic chronograph", "Stylish dress watch", "Sporty digital watch"]
 image_urls = ["https://rb.gy/c98mip","http://tinyurl.com/5n7pr9dx","http://tinyurl.com/2fzca3cd", "http://tinyurl.com/yc79fyej", "http://tinyurl.com/4athzj2r", "http://tinyurl.com/bde63rvs", "http://tinyurl.com/2svn6zvx", "http://tinyurl.com/a99rzkr2", "http://tinyurl.com/3pvv66ac", "http://tinyurl.com/4azpff56", "http://tinyurl.com/5csfnu8t", "http://tinyurl.com/mtmrz874", "http://tinyurl.com/34tmzj8y", "http://tinyurl.com/bdcw4wae", "http://tinyurl.com/4zxnnydf", "http://tinyurl.com/34ea53b8", "http://tinyurl.com/364pp4kp", "http://tinyurl.com/x4wckcu3"]
 
+
 20.times do
-  Watch.create(
+  file = URI.open("https://bijoux-totem.fr/60382-large_default/cluse-montre-femme-fluette.jpg")
+  watch = Watch.new(
     brand: brands.sample,
     year: rand(1900..Time.now.year),
     model: models.sample,
     latitude: rand(-90.0..90.0),
     longitude: rand(-180.0..180.0),
     address: addresses.sample,
-    price_per_day: 2200,
+    price_per_day: 125,
     description: descriptions.sample,
     url: image_urls.sample,
     available_from: DateTime.now,
     available_until: DateTime.now + rand(1..30).days,
     user_id: User.pluck(:id).sample
   )
+  watch.photo.attach(io: file, filename: "yolo.jpg", content_type: "imgae/jpg")
+  watch.save
+  puts "Watch created"
 end
-
-
