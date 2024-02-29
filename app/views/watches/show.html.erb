@@ -14,7 +14,7 @@
         <h4>Watch description :</h4>
         <p><%= @watch.description %></p>
       </div>
-      <div class="watch-price d-flex flex-column">
+      <div class="watch-price d-flex">
         <h3><%= @watch.price_per_day %> €</h3>
         <p>/day</p>
       </div>
@@ -54,12 +54,12 @@
           <span class="d-none" data-dynamic-price-target="price"></span>
         </div>
       <% end %>
+      <% end %>
 </div>
-  <div class="container pb-4">
-    <div id="map-container" class="rounded shadow"
-      data-controller="map"
-      data-map-markers-value="<%= @markers.to_json %>"
-      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-    </div>
+<div class="pb-4">
+  <div id="map-container" class="rounded shadow container"
+    data-controller="map"
+    data-map-markers-value="<%= @markers.to_json %>"
+    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
 </div>
