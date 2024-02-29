@@ -11,7 +11,6 @@
           <p><%= @watch.model %></p>
         </div>
       </div>
-    </div>
 
       <div class="watch-description">
         <h4>Watch description :</h4>
@@ -23,6 +22,8 @@
         <p>/day</p>
       </div>
     </div>
+  </div>
+
     <% if @watch.user != current_user %>
       <div class="form-book">
         <h2>Booking :</h2>
@@ -38,12 +39,11 @@
           </div>
         <% end %>
       <% end %>
-  </div>
-    <div>
+</div>
+
     <div style="width: 250px; height: 200px;"
       data-controller="map"
       data-map-markers-value="<%= @markers.to_json %>"
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
     </div>
-  </div>
 </div>
