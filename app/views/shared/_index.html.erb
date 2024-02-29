@@ -6,7 +6,7 @@
             <% if watch.photo.attached? %>
               <%= cl_image_tag watch.photo.key, class: "card_img" %>
             <% else %>
-              <%= image_tag "https://rb.gy/c98mip", class:"card_img" %>
+              <%= image_tag watch.url, class:"card_img" %>
             <% end %>
           <% end %>
         </div>
