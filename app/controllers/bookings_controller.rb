@@ -11,7 +11,7 @@ class BookingsController < ApplicationController
     @booking.user = current_user
     @booking.total_price = ((@booking.end_date.to_date - @booking.start_date.to_date).to_i + 1) * @watch.price_per_day
     if @booking.save
-      redirect_to dashboard_path(section: 'watches')
+      redirect_to dashboard_path(section: 'bookings')
       flash[:notice] = "Votre location est en cours de validation"
     else
       render :new, :status, :unprocessable_entity
