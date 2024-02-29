@@ -10,6 +10,7 @@ class WatchesController < ApplicationController
         info_window_html: render_to_string(partial: "info_window", locals: { watch: watch })
       }
     end
+    @watch = Watch.new
   end
 
   def new
@@ -32,7 +33,7 @@ class WatchesController < ApplicationController
   def create
     @watch = Watch.new(watch_params)
     @watch.user = current_user
-    
+
     respond_to do |format|
       if @watch.save
         format.html { redirect_to dashboard_path(section: 'watches') }
