@@ -8,6 +8,7 @@
       <%= f.input :description, label: false, placeholder: "description" %>
       <%= f.input :year, label: false, placeholder: "year" %>
       <%= f.input :price_per_day, label: false, placeholder: "price" %>
+      <%= f.input :address, label: false, placeholder: "address" %>
       <%= f.input :available_from, as: :string, input_html: { data: { datepicker_target: "startTime" } } %>
       <%= f.input :available_until, as: :string, input_html: { data: { datepicker_target: "endTime" } } %>
     <% if local_assigns[:for_watch] %>
