@@ -3,7 +3,7 @@
 
 .flexbox {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr ;
   justify-content: space-between;
   grid-gap: 16px;
   justify-self: auto;
@@ -49,4 +49,13 @@
 }
 .price_style {
   font-weight: bold;
+}
+
+.map_integration {
+  margin-left: 1em;
+  border-radius: 10px;
+  height: 550px !important;
+  position: sticky;
+  margin-top: 18px;
+  top: 70px
 }

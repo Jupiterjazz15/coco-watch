@@ -2,6 +2,10 @@ class WatchesController < ApplicationController
   before_action :set_watch, only: %i[show edit update destroy]
   def index
     @watches = Watch.all
+    if params[:query].present?
+      sql_subquery = "brand ILIKE :query OR model ILIKE :query OR description ILIKE :query OR address ILIKE :query"
+      @watches = @watches.where(sql_subquery, query: "%#{params[:query]}%")
+    end
     @markers = @watches.geocoded.map do |watch|
       {
         lat: watch.latitude,
@@ -9,10 +13,6 @@ class WatchesController < ApplicationController
         marker_html: render_to_string(partial: "marker", locals: { watch: watch }),
         info_window_html: render_to_string(partial: "info_window", locals: { watch: watch })
       }
-      if params[:query].present?
-        sql_subquery = "brand ILIKE :query OR model ILIKE :query OR description ILIKE :query OR address ILIKE :query"
-        @watches = @watches.where(sql_subquery, query: "%#{params[:query]}%")
-      end
     end
     @watch = Watch.new
   end
