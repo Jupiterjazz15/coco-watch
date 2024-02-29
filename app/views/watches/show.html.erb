@@ -20,20 +20,39 @@
       </div>
     </div>
   </div>
-    <% if @watch.user != current_user %>
-      <div class="form-book">
-        <h2>Booking :</h2>
-          <%= simple_form_for [@watch, @booking], data: { controller: "datepicker" } do |f| %>
-            <div class="form-inputs">
-                <%= f.input :start_date, as: :string, input_html: { data: { datepicker_target: "startTime" } } %>
-                <%= f.input :end_date, as: :string, input_html: { data: { datepicker_target: "endTime" } }%>
-            </div>
-
-            <div class="form-actions rounded px-1em text-center">
-              <%= f.button :submit %>
-            </div>
+  <% if @watch.user != current_user %>
+    <div class="form-book"
+         data-controller="dynamic-price"
+         data-dynamic-price-price-value="<%= @watch.price_per_day %>">
+      <h2>Booking :</h2>
+        <%= simple_form_for [@watch, @booking],
+                            data: {
+                              controller: "datepicker",
+                              action: "change->dynamic-price#updatePrice"
+                            } do |f| %>
+          <div class="form-inputs">
+              <%= f.input :start_date,
+                          as: :string,
+                          input_html: {
+                            data: {
+                              datepicker_target: "startTime",
+                              dynamic_price_target: "start"
+                            }
+                          } %>
+              <%= f.input :end_date,
+                          as: :string,
+                          input_html: {
+                            data: {
+                              datepicker_target: "endTime",
+                              dynamic_price_target: "end"
+                            }
+                          } %>
           </div>
-        <% end %>
+          <div class="form-actions rounded px-1em text-center">
+            <%= f.button :submit %>
+          </div>
+          <span class="d-none" data-dynamic-price-target="price"></span>
+        </div>
       <% end %>
 </div>
   <div class="container pb-4">
