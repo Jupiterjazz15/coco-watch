@@ -33,7 +33,7 @@ class WatchesController < ApplicationController
     @watch = Watch.new(watch_params)
     @watch.user = current_user
     if @watch.save
-      redirect_to dashboard_path
+      redirect_to dashboard_path(section: 'watches')
     else
       render :new, status: :unprocessable_entity
     end
@@ -45,7 +45,7 @@ class WatchesController < ApplicationController
   def update
     @watch.update(watch_params)
     if @watch.save
-      redirect_to dashboard_path
+      redirect_to dashboard_path(section: 'watches')
     else
       render :new, status: :unprocessable_entity
     end
@@ -53,7 +53,7 @@ class WatchesController < ApplicationController
 
   def destroy
     @watch.delete
-    redirect_to dashboard_path
+    redirect_to dashboard_path(section: 'watches')
   end
 
   private
