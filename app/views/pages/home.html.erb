@@ -5,10 +5,25 @@
 </div>
 
 <div class="container">
+  <div class="row justify-content-center mt-3">
+    <div class="col-sm-8">
+
+      <%= form_with url: watches_path, method: :get, class: "d-flex" do %>
+        <%= text_field_tag :query,
+              params[:query],
+              class: "form-control",
+              placeholder: "Type a keyword"%>
+        <%= submit_tag "Search", name: "", class: "btn btn-dark" %>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
+<div class="container">
   <div class="row mt-3">
     <div class="col-6 gx-2">
       <div class="card-trip">
-        <%# <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.svgrepo.com%2Fsvg%2F130076%2Fwatch&psig=AOvVaw076soY5fS8c1LNoh5ltgXb&ust=1709205461428000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCNDB4dT0zYQDFQAAAAAdAAAAABAE"/> %>
         <div class="card-trip-infos">
         <h2>Rent <strong>someone</strong> watch</h2>
             <ul>
