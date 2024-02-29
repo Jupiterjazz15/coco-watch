@@ -40,15 +40,14 @@
 
 <!-- Modal -->
 <div class="modal fade" id="watchFormModal" tabindex="-1" aria-labelledby="watchFormModalLabel" aria-hidden="true"
-  data-controller="watch-form"
-  data-watch-form-error-value="<%= @error.nil? ? "false" : "true" %>">
+  data-controller="watch-form">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="watchFormModalLabel">Modal title</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" data-watch-form-target="modalBody">
         <%= render "shared/form_watches", watch: @watch, for_watch: true %>
       </div>
     </div>

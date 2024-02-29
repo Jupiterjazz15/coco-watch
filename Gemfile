@@ -41,6 +41,8 @@ gem "devise"
 # Nokogiri gem
 gem  "nokogiri"
 
+
+
 # https://github.com/faker-ruby/faker?tab=readme-ov-file#generators
 gem 'faker'
 
@@ -66,6 +68,8 @@ group :development, :test do
   gem "dotenv-rails"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
+  gem "pry-byebug"
+  gem "pry-rails"
 end
 
 group :development do
