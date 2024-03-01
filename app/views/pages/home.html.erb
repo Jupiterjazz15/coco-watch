@@ -2,13 +2,13 @@
   <h1>Cocowatch</h1>
   <p>Change and discover the beauty of time.</p>
   <div class="row position mt-5">
-      <div class="col-sm-8">
-        <%= form_with url: watches_path, method: :get, class: "d-flex" do %>
+      <div class="col-sm-8 ">
+        <%= form_with url: watches_path, method: :get, class: "d-flex " do %>
           <%= text_field_tag :query,
                 params[:query],
-                class: "form-control",
-                placeholder: "Type a keyword"%>
-          <%= submit_tag "Search", name: "", class: "btn btn-dark mx-1" %>
+                class: "form-control searchbar_placeholder_border col--2",
+                placeholder: "Find a watch"%>
+          <%= submit_tag "Find a co-watcher", name: "", class: "btn btn-dark  searchbar_btn_border" %>
         <% end %>
       </div>
     </div>
