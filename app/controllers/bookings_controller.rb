@@ -1,4 +1,5 @@
 class BookingsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
   def new
     @booking = Booking.new
     @watch = Watch.find(params[:watch_id])
