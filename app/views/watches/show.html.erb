@@ -14,7 +14,7 @@
         <h4>Watch description :</h4>
         <p><%= @watch.description %></p>
       </div>
-      <div class="watch-price d-flex">
+      <div class="watch-price d-flex align-items-center">
         <h3><%= @watch.price_per_day %> €</h3>
         <p>/day</p>
       </div>
@@ -48,10 +48,10 @@
                             }
                           } %>
           </div>
-          <div class="form-actions rounded px-1em text-center">
+          <div class="form-actions rounded px-1em text-center mb-3">
             <%= f.button :submit %>
           </div>
-          <span class="d-none" data-dynamic-price-target="price"></span>
+          <span class="d-none mt-3" data-dynamic-price-target="price"></span>
         </div>
       <% end %>
       <% end %>
