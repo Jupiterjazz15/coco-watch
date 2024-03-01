@@ -2,19 +2,21 @@
   <div class="row">
 
     <!-- Sidebar -->
-    <div class="col-md-2 sidebar-sticky" style=" background-color: #ffffff;">
+    <div class="col-md-2 sidebar-sticky">
       <div class="flex-center">
-        <h4>Your Details</h4>
         <p><%= image_tag current_user.avatar, class: "avatar" %></p>
         <p><%= current_user.first_name %> <%= current_user.last_name %></p>
-        <div>
-        <%= link_to "My watch", dashboard_path(section: 'watches') %>
-        </div>
-        <div>
-        <%= link_to "My booking", dashboard_path(section: 'bookings') %>
+        <div class="onglets">
+          <div style="padding-bottom: 1em;">
+          <%= link_to "My watch", dashboard_path(section: 'watches') %>
+          </div>
+          <div>
+          <%= link_to "My booking", dashboard_path(section: 'bookings') %>
+          </div>
         </div>
       </div>
     </div>
+
 
 <!-- Booking & watches -->
     <div class="col-md-10 p-0">
