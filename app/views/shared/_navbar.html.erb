@@ -3,19 +3,20 @@
     <%= link_to root_path, class: "navbar-brand" do %>
       <%= image_tag "https://i.etsystatic.com/10919371/r/il/3f108e/1637572565/il_fullxfull.1637572565_e9gc.jpg" %>
     <% end %>
-
+    <!-- Icone de montre dans la navbar -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    <h5 class="ecriture-logo flex-grow-1">Cocowatch</h5>
 
+
+    <!-- Reste de la navbar -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item active">
-            <%# link_to "Add Watch", watches_new_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%# link_to "Messages", "#", class: "nav-link" %>
           </li>
           <li class="nav-item dropdown">
           <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
