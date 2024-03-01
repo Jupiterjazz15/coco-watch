@@ -20,6 +20,16 @@
   border-radius: 10px
 }
 
+.card {
+  opacity: 0.9;
+  transition: all 0.25s ease;
+}
+
+.card:hover {
+  opacity: 1;
+  transform: scale(1.10);
+}
+
 .text_display {
   margin-left: 4px;
   margin-right: 4px;
@@ -52,9 +62,9 @@
 }
 
 .map_integration {
-  margin-left: 1em;
+  margin-left: 2em;
   border-radius: 10px;
-  height: 550px !important;
+  height: 680px !important;
   position: sticky;
   margin-top: 18px;
   top: 70px
