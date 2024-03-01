@@ -19,11 +19,11 @@
 <!-- Booking & watches -->
     <div class="col-md-10">
     <% if @section.nil? || @section == 'bookings' %>
-    <div class="container mt-5">
-      <h3>My Bookings:</h3>
-      <div class="d-flex flex-wrap">
+    <h3>My Bookings:</h3>
+    <div class="container">
+      <div class="d-flex flex-wrap justify-cards">
         <% @bookings.each do |booking| %>
-          <div class="card shadow m-2" style="width: 18rem;">
+          <div class="card shadow m-3" style="width: 18rem;">
             <div class="card-body">
               <%= link_to(watch_path(booking.watch)) do %>
                 <% if booking.watch.photo.attached? %>
@@ -32,47 +32,53 @@
                   <%= image_tag "https://rb.gy/c98mip", class: "card-img-top" %>
                 <% end %>
               <% end %>
-              <h5 class="card-title mt-3"><%= booking.watch.brand.upcase %></h5>
-              <p class="card-text"><%= booking.watch.price_per_day %> €</p>
-              <%= link_to booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" do %>
-                <i class="fas fa-trash-alt"></i> Delete
-              <% end %>
+              <div class="card-info">
+                <h5 class="card-title mt-3"><%= booking.watch.brand.upcase %></h5>
+                <p class="card-text"><%= booking.watch.price_per_day %> €</p>
+                <div class="d-flex justify-content-end">
+                  <%= link_to booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "delete-button" do %>
+                  <i class="fas fa-trash-alt"></i>
+                <% end %>
+              </div>
             </div>
           </div>
         <% end %>
       </div>
     </div>
     <% end %>
-    <% if @section.nil? || @section == 'watches' %>
-    <div class="container mt-5">
+
+  <% if @section.nil? || @section == 'watches' %>
     <h3>My Watches:</h3>
-    <div class="d-flex flex-wrap">
-      <% @watches.each do |watch| %>
-        <div class="card shadow m-2" style="width: 18rem;">
-          <div class="card-body">
-            <%= link_to(watch_path(watch)) do %>
-              <% if watch.photo.attached? %>
-                <%= cl_image_tag watch.photo.key, class: "card-img-top" %>
-              <% else %>
-                <%= image_tag "https://rb.gy/c98mip", class: "card-img-top" %>
-              <% end %>
+      <div class="container">
+          <div class="d-flex flex-wrap justify-cards">
+            <% @watches.each do |watch| %>
+              <div class="card shadow m-3" style="width: 18rem;">
+                <div class="card-body">
+                <%= link_to(watch_path(watch)) do %>
+                  <% if watch.photo.attached? %>
+                    <%= cl_image_tag watch.photo.key, class: "card-img-top" %>
+                  <% else %>
+                    <%= image_tag "https://rb.gy/c98mip", class: "card-img-top" %>
+                  <% end %>
+                  <% end %>
+                  <div class="card-info">
+                    <h5 class="card-title mt-3"><%= watch.brand.upcase %></h5>
+                    <p class="card-text"><%= watch.price_per_day %> €</p>
+                    <div class="d-flex justify-content-between">
+                      <%= link_to edit_watch_path(watch), class: "edit-button" do %>
+                        <i class="fas fa-edit"></i>
+                      <% end %>
+                      <%= link_to watch_path(watch), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "delete-button" do %>
+                        <i class="fas fa-trash-alt"></i>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
             <% end %>
-            <h5 class="card-title mt-3"><%= watch.brand.upcase %></h5>
-            <p class="card-text"><%= watch.price_per_day %> €</p>
-            <div class="d-flex justify-content-between">
-              <%= link_to edit_watch_path(watch), class: "btn btn-primary" do %>
-                <i class="fas fa-edit"></i> Edit
-              <% end %>
-              <%= link_to watch_path(watch), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" do %>
-                <i class="fas fa-trash-alt"></i> Delete
-              <% end %>
-            </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
-    <% end %>
-    </div>
-  </div>
   </div>
 </div>
