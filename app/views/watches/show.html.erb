@@ -1,7 +1,7 @@
 <div class="watch-card-container">
   <div class="card-content d-flex">
     <div class="watch-img">
-      <img src="<%= @watch.url %>" alt="watch_image" height="100%" >
+      <%= cl_image_tag @watch.photo.key, class: "card_img" %>
     </div>
     <div class="watch-card d-block">
       <div class="title">
