@@ -1,4 +1,15 @@
 <div class="ms-2 me-2">
+<!-- Searchbar de l'index -->
+<div class="col-sm-8 ">
+        <%= form_with url: watches_path, method: :get, class: "d-flex" do %>
+          <%= text_field_tag :query,
+                params[:query],
+                class: "form-control searchbar_placeholder_border_index col--2",
+                placeholder: "Find a watch"%>
+          <%= submit_tag "Find a co-watcher", name: "", class: "btn btn-dark  searchbar_btn_border_index" %>
+        <% end %>
+</div>
+
   <div class="d-flex justify-content-center">
     <div class="flexbox col-8">
       <% @watches.each do |watch| %>

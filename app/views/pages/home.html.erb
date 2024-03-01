@@ -2,7 +2,7 @@
   <h1>Cocowatch</h1>
   <p>Change and discover the beauty of time.</p>
   <div class="row position mt-5">
-      <div class="col-sm-8 ">
+      <div>
         <%= form_with url: watches_path, method: :get, class: "d-flex" do %>
           <%= text_field_tag :query,
                 params[:query],
