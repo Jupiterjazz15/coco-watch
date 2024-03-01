@@ -1,4 +1,5 @@
 class BookingsController < ApplicationController
+  before_action :set_booking, only: [:accept, :decline]
   before_action :authenticate_user!, only: [:new, :create]
   def new
     @booking = Booking.new
@@ -19,6 +20,16 @@ class BookingsController < ApplicationController
     end
   end
 
+  def accept
+    @booking.accepted!
+    redirect_to dashboard_path(section: 'bookings')
+  end
+
+  def decline
+    @booking.declined!
+    redirect_to dashboard_path(section: 'bookings')
+  end
+
   def destroy
     @booking = Booking.find(params[:id])
     @booking.destroy
@@ -26,6 +37,10 @@ class BookingsController < ApplicationController
   end
 
   private
+
+  def set_booking
+    @booking = Booking.find(params[:id])
+  end
 
   def bookings_params
     params.require(:booking).permit(:start_date, :end_date, :watch_id)

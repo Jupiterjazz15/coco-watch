@@ -11,5 +11,10 @@ Rails.application.routes.draw do
   resources :watches, only: [:index, :new, :show, :create, :edit, :update, :destroy] do
     resources :bookings, only: [:new, :create]
   end
-  resources :bookings, only: [:destroy]
+  resources :bookings, only: [:destroy] do
+    member do
+      patch :accept
+      patch :decline
+    end
+  end
 end
