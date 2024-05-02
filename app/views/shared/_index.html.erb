@@ -18,6 +18,7 @@
               <%= link_to(watch_path(watch)) do %>
                 <% if watch.photo.attached? %>
                   <%= cl_image_tag watch.photo.key, class: "card_img" %>
+
                 <% else %>
                   <%= image_tag watch.url, class:"card_img" %>
                 <% end %>
