@@ -1,6 +1,5 @@
 <div class="container-fluid" style="height: 100vh;">
   <div class="row">
-
     <!-- Sidebar -->
     <div class="col-md-2 sidebar-sticky">
       <div class="flex-center">
@@ -8,104 +7,118 @@
         <p><%= current_user.first_name %> <%= current_user.last_name %></p>
         <div class="onglets">
           <div style="padding-bottom: 1em;">
-          <%= link_to "My watches", dashboard_path(section: 'watches') %>
+            <%= link_to "My watches", dashboard_path(section: 'watches') %>
           </div>
           <div style="padding-bottom: 1em;">
-          <%= link_to "My bookings", dashboard_path(section: 'bookings') %>
+            <%= link_to "My bookings", dashboard_path(section: 'bookings') %>
           </div>
           <div style="padding-bottom: 1em;">
-          <%= link_to "My booking requests", dashboard_path(section: 'bookings request') %>
+            <%= link_to "My booking requests", dashboard_path(section: 'bookings request') %>
           </div>
         </div>
       </div>
     </div>
 
-
-<!-- Booking & watches -->
+    <!-- Booking & watches -->
     <div class="col-md-10 p-0">
-    <% if @section.nil? || @section == 'bookings' %>
-    <h3>My bookings</h3>
-    <div class="container">
-      <div class="d-flex flex-wrap justify-cards">
-        <% @bookings.not_nil.each do |booking| %>
-          <div class="card shadow m-3" style="width: 18rem;">
-            <div class="card-body">
-              <%= link_to(watch_path(booking.watch)) do %>
-                <% if booking.watch.photo.attached? %>
-                  <%= cl_image_tag booking.watch.photo.key, class: "card-img-top" %>
-                <% else %>
-                  <%= image_tag "https://rb.gy/c98mip", class: "card-img-top" %>
-                <% end %>
-              <% end %>
-              <div class="card-info">
-                <h5 class="card-title mt-3"><%= booking.watch.brand.upcase %></h5>
-                <p class="card-text"><%= booking.watch.price_per_day %> €</p>
-                <div class="d-flex justify-content-end">
-                  <%= link_to booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "delete-button" do %>
-                  <i class="fas fa-trash-alt"></i>
-                <% end %>
+      <% if @section.nil? || @section == 'bookings' %>
+        <h3 class="h3-dashboard">My bookings</h3>
+        <p class="p-dashboard">Watches you've always dreamed of:</p>
+        <div class="container">
+          <div class="d-flex flex-wrap justify-cards">
+            <% @bookings.not_nil.each do |booking| %>
+              <div class="card shadow m-3" style="width: 18rem;">
+                <div class="card-body">
+                  <%= link_to(watch_path(booking.watch)) do %>
+                    <% if booking.watch.photo.attached? %>
+                      <%= cl_image_tag booking.watch.photo.key, class: "card-img-top" %>
+                    <% else %>
+                      <%= image_tag "https://rb.gy/c98mip", class: "card-img-top" %>
+                    <% end %>
+                  <% end %>
+                  <div class="card-info">
+                    <h5 class="card-title mt-3"><%= booking.watch.brand.upcase %></h5>
+                    <p class="card-text"><%= booking.watch.price_per_day %> €</p>
+                    <div class="container">
+                      <div class="d-flex justify-content-end">
+                        <%= link_to booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "delete-button" do %>
+                          <i class="fas fa-trash-alt"></i>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
+            <% end %>
           </div>
-         </div>
-        <% end %>
-    </div>
-    <% end %>
+        </div>
+      <% end %>
 
       <% if @section.nil? || @section == 'bookings request' %>
-    <h3>My booking requests</h3>
-    <div class="container">
-      <div class="d-flex flex-wrap justify-cards">
-        <% @watches.each do |watch| %>
-          <% watch.bookings.each do |booking| %>
-          <div class="card shadow m-3" style="width: 18rem;">
-            <div class="card-body">
-              <%= link_to(watch_path(booking)) do %>
-                <% if booking.watch.photo.attached? %>
-                  <%= cl_image_tag booking.watch.photo.key, class: "card-img-top" %>
-                <% else %>
-                  <%= image_tag "https://rb.gy/c98mip", class: "card-img-top" %>
-                <% end %>
-              <% end %>
-              <div class="card-info">
-                <h5 class="card-title mt-3"><%= booking.watch.brand.upcase %></h5>
-                <p class="card-text"><%= booking.watch.price_per_day %> €</p>
-                <div class="d-flex justify-content-around">
-                  <%= link_to accept_booking_path(booking), data: { turbo_method: :patch, turbo_confirm: 'Are you sure?' }  do %>
-                  <% if booking.booking_status.nil? %>
-                  <i class="fas fa-solid fa-check"></i>
+        <h3 class="h3-dashboard">My booking requests</h3>
+        <p class="p-dashboard">Watches you want to share: </p>
+        <div class="container">
+          <div class="d-flex flex-wrap justify-cards">
+            <% @bookings_of_my_watches.each do |booking| %>
+              <div class="card shadow m-3" style="width: 18rem;">
+                <div class="card-body">
+                  <%= link_to(watch_path(booking.watch)) do %>
+                    <% if booking.watch.photo.attached? %>
+                      <%= cl_image_tag booking.watch.photo.key, class: "card-img-top" %>
+                    <% else %>
+                      <%= image_tag "https://rb.gy/c98mip", class: "card-img-top" %>
+                    <% end %>
                   <% end %>
-                  <% end %>
-                  <%= link_to decline_booking_path(booking), data: { turbo_method: :patch, turbo_confirm: 'Are you sure?' } do %>
-                  <%  if booking.booking_status.nil? %>
-                  <i class="fas fa-solid fa-ban"></i>
-                  <% end %>
-                  <% end %>
-                  <%= link_to booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "delete-button" do %>
-                  <i class="fas fa-trash-alt"></i>
-                  <% end %>
-              </div>
-            </div>
-          </div>
-         </div>
-        <% end %>
-        <% end %>
-    </div>
-    <% end %>
+                  <div class="card-info">
+                    <h5 class="card-title mt-3"><%= booking.watch.brand.upcase %></h5>
+                    <p class="card-text"><%= booking.user.first_name %> </p>
+                    <p class="card-text"><%= booking.watch.price_per_day %> €</p>
+                    <div class="d-flex justify-content-around">
 
-  <% if @section.nil? || @section == 'watches' %>
-    <h3>My watches</h3>
-      <div class="container">
+                      <% if booking.booking_status.nil? %>
+                        <p> Do you want to accept this booking request ? </p>
+                        <%= link_to accept_booking_path(booking), data: { turbo_method: :patch, turbo_confirm: 'Are you sure?' } do %>
+                          <i class="fas fa-check-circle"></i>
+                        <% end %>
+                        <%= link_to decline_booking_path(booking), data: { turbo_method: :patch, turbo_confirm: 'Are you sure?' } do %>
+                          <i class="fas fa-times-circle"></i>
+                        <% end %>
+                      <% elsif booking.booking_status == 'accepted' %>
+                        <p>You have accepted this booking. Do you want to refuse it ? </p>
+                        <%= link_to decline_booking_path(booking), data: { turbo_method: :patch, turbo_confirm: 'Are you sure?' } do %>
+                          <i class="fas fa-check-circle" style="color: red;"></i>
+                        <% end %>
+                      <% else %>
+                        <p>You have declined this booking. Do you want to accept it ? </p>
+                        <%= link_to accept_booking_path(booking), data: { turbo_method: :patch, turbo_confirm: 'Are you sure?' } do %>
+                          <i class="fas fa-check-circle"></i>
+                        <% end %>
+                        <%= link_to booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "delete-button" do %>
+                          <i class="fas fa-trash-alt"></i>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <% if @section.nil? || @section == 'watches' %>
+        <h3 class="h3-dashboard">My watches</h3>
+        <div class="container">
           <div class="d-flex flex-wrap justify-cards">
             <% @watches.each do |watch| %>
               <div class="card shadow m-3" style="width: 18rem;">
                 <div class="card-body">
-                <%= link_to(watch_path(watch)) do %>
-                  <% if watch.photo.attached? %>
-                    <%= cl_image_tag watch.photo.key, class: "card-img-top" %>
-                  <% else %>
-                    <%= image_tag "https://rb.gy/c98mip", class: "card-img-top" %>
-                  <% end %>
+                  <%= link_to(watch_path(watch)) do %>
+                    <% if watch.photo.attached? %>
+                      <%= cl_image_tag watch.photo.key, class: "card-img-top" %>
+                    <% else %>
+                      <%= image_tag "https://rb.gy/c98mip", class: "card-img-top" %>
+                    <% end %>
                   <% end %>
                   <div class="card-info">
                     <h5 class="card-title mt-3"><%= watch.brand.upcase %></h5>
@@ -123,8 +136,8 @@
               </div>
             <% end %>
           </div>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

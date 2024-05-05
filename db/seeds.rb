@@ -19,6 +19,7 @@ file = URI.open("https://media.rolex.com/image/upload/q_auto/f_auto/t_v7/c_limit
 watch2.photo.attach(io: file, filename: "watch2.png", content_type: "image/png")
 p "#{watch2.model} is created"
 
+
 ### USER 2 : Coralie et ses montres ###
 
 user2 = User.create!(first_name: "Coralie", last_name: "Haller", phone_number: "234-567-8901", avatar: "https://ca.slack-edge.com/T02NE0241-U06DG28K0CT-fafee26638ca-512", email: "coralie@test.com", password: "azerty" )
@@ -33,6 +34,12 @@ watch4 = Watch.create!(brand: "Rolex", model: "Day-Date 40", description: "The R
 file = URI.open("https://media.rolex.com/image/upload/q_auto/f_auto/t_v7/c_limit,w_2440/v1/catalogue/2024/upright-c/m228235-0055")
 watch4.photo.attach(io: file, filename: "watch4.png", content_type: "image/png")
 p "#{watch4.model} is created"
+
+## ma demande pour réserver une montre à Fares ##
+booking2 = Booking.create!(start_date: "2024-12-01", end_date: "2024-12-03", total_price: (Watch.find_by(user_id: User.first.id).price_per_day  * (Date.parse("2024-12-03") - Date.parse("2024-12-01"))), booking_status: nil, user_id: User.second.id, watch_id: Watch.find_by(user_id: User.first.id).id)
+
+## la demande de Fares pour me réserver une montre ##
+booking1 = Booking.create!(start_date: "2024-08-01", end_date: "2024-08-03", total_price: (Watch.find_by(user_id: User.second.id).price_per_day * (Date.parse("2024-08-03") - Date.parse("2024-08-01"))), booking_status: nil, user_id: User.first.id, watch_id: Watch.find_by(user_id: User.second.id).id)
 
 ### USER 3 : Pedro et ses montres ###
 
