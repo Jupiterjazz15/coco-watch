@@ -71,6 +71,7 @@ class WatchesController < ApplicationController
   end
 
   def destroy
+    @watch.bookings.destroy_all
     @watch.delete
     redirect_to dashboard_path(section: 'watches')
   end

@@ -19,8 +19,43 @@
       </div>
     </div>
 
-    <!-- Booking & watches -->
     <div class="col-md-10 p-0">
+
+      <!-- Section Watches -->
+      <% if @section.nil? || @section == 'watches' %>
+        <h3 class="h3-dashboard">My watches</h3>
+        <div class="container">
+          <div class="d-flex flex-wrap justify-cards">
+            <% @watches.each do |watch| %>
+              <div class="card shadow m-3" style="width: 18rem;">
+                <div class="card-body">
+                  <%= link_to(watch_path(watch)) do %>
+                    <% if watch.photo.attached? %>
+                      <%= cl_image_tag watch.photo.key, class: "card-img-top" %>
+                    <% else %>
+                      <%= image_tag "https://rb.gy/c98mip", class: "card-img-top" %>
+                    <% end %>
+                  <% end %>
+                  <div class="card-info">
+                    <h5 class="card-title mt-3"><%= watch.brand.upcase %></h5>
+                    <p class="card-text"><%= watch.price_per_day %> €</p>
+                    <div class="d-flex justify-content-around">
+                      <%= link_to edit_watch_path(watch), class: "edit-button" do %>
+                        <i class="fas fa-edit"></i>
+                      <% end %>
+                      <%= link_to watch_path(watch), method: :delete, data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "delete-button" do %>
+                        <i class="fas fa-trash-alt"></i>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <!-- Section My Bookings -->
       <% if @section.nil? || @section == 'bookings' %>
         <h3 class="h3-dashboard">My bookings</h3>
         <p class="p-dashboard">Watches you've always dreamed of:</p>
@@ -40,8 +75,8 @@
                     <h5 class="card-title mt-3"><%= booking.watch.brand.upcase %></h5>
                     <p class="card-text"><%= booking.watch.price_per_day %> €</p>
                     <div class="container">
-                      <div class="d-flex justify-content-end">
-                        <%= link_to booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "delete-button" do %>
+                      <div class="d-flex justify-content-around">
+                        <%= link_to booking_path(booking), method: :delete, data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "delete-button", :params => { section: 'bookings' } do %>
                           <i class="fas fa-trash-alt"></i>
                         <% end %>
                       </div>
@@ -54,6 +89,7 @@
         </div>
       <% end %>
 
+      <!-- Section My Bookings request -->
       <% if @section.nil? || @section == 'bookings request' %>
         <h3 class="h3-dashboard">My booking requests</h3>
         <p class="p-dashboard">Watches you want to share: </p>
@@ -71,32 +107,40 @@
                   <% end %>
                   <div class="card-info">
                     <h5 class="card-title mt-3"><%= booking.watch.brand.upcase %></h5>
-                    <p class="card-text"><%= booking.user.first_name %> </p>
-                    <p class="card-text"><%= booking.watch.price_per_day %> €</p>
-                    <div class="d-flex justify-content-around">
+                    <p class="card-text"> <%= booking.user.first_name %> wants to rent your watch </p>
+                    <p class="card-text"> Total price: <%= booking.watch.price_per_day %> €</p>
 
                       <% if booking.booking_status.nil? %>
-                        <p> Do you want to accept this booking request ? </p>
-                        <%= link_to accept_booking_path(booking), data: { turbo_method: :patch, turbo_confirm: 'Are you sure?' } do %>
-                          <i class="fas fa-check-circle"></i>
-                        <% end %>
-                        <%= link_to decline_booking_path(booking), data: { turbo_method: :patch, turbo_confirm: 'Are you sure?' } do %>
-                          <i class="fas fa-times-circle"></i>
-                        <% end %>
+                        <p style ="text-align: center"> Do you want to accept this booking request ? </p>
+                        <div class="d-flex justify-content-around">
+                          <%= link_to accept_booking_path(booking), data: { turbo_method: :patch, turbo_confirm: 'Are you sure?' } do %>
+                            <i class="fas fa-check-circle"></i>
+                          <% end %>
+                          <%= link_to decline_booking_path(booking), data: { turbo_method: :patch, turbo_confirm: 'Are you sure?' } do %>
+                            <i class="fas fa-times-circle"></i>
+                          <% end %>
+                        </div>
+
                       <% elsif booking.booking_status == 'accepted' %>
                         <p>You have accepted this booking. Do you want to refuse it ? </p>
-                        <%= link_to decline_booking_path(booking), data: { turbo_method: :patch, turbo_confirm: 'Are you sure?' } do %>
-                          <i class="fas fa-check-circle" style="color: red;"></i>
-                        <% end %>
+                        <div class="d-flex justify-content-around">
+                          <%= link_to decline_booking_path(booking), data: { turbo_method: :patch, turbo_confirm: 'Are you sure?' } do %>
+                            <i class="fas fa-check-circle" style="color: red;"></i>
+                          <% end %>
+                          </div>
+
                       <% else %>
                         <p>You have declined this booking. Do you want to accept it ? </p>
-                        <%= link_to accept_booking_path(booking), data: { turbo_method: :patch, turbo_confirm: 'Are you sure?' } do %>
-                          <i class="fas fa-check-circle"></i>
+                        <div class="d-flex justify-content-around">
+                          <%= link_to accept_booking_path(booking), data: { turbo_method: :patch, turbo_confirm: 'Are you sure?' } do %>
+                            <i class="fas fa-check-circle"></i>
+                          <% end %>
+                          <%= link_to booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "delete-button" do %>
+                            <i class="fas fa-trash-alt"></i>
+                          <% end %>
                         <% end %>
-                        <%= link_to booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "delete-button" do %>
-                          <i class="fas fa-trash-alt"></i>
-                        <% end %>
-                      <% end %>
+                      </div>
+
                     </div>
                   </div>
                 </div>
@@ -106,38 +150,6 @@
         </div>
       <% end %>
 
-      <% if @section.nil? || @section == 'watches' %>
-        <h3 class="h3-dashboard">My watches</h3>
-        <div class="container">
-          <div class="d-flex flex-wrap justify-cards">
-            <% @watches.each do |watch| %>
-              <div class="card shadow m-3" style="width: 18rem;">
-                <div class="card-body">
-                  <%= link_to(watch_path(watch)) do %>
-                    <% if watch.photo.attached? %>
-                      <%= cl_image_tag watch.photo.key, class: "card-img-top" %>
-                    <% else %>
-                      <%= image_tag "https://rb.gy/c98mip", class: "card-img-top" %>
-                    <% end %>
-                  <% end %>
-                  <div class="card-info">
-                    <h5 class="card-title mt-3"><%= watch.brand.upcase %></h5>
-                    <p class="card-text"><%= watch.price_per_day %> €</p>
-                    <div class="d-flex justify-content-between">
-                      <%= link_to edit_watch_path(watch), class: "edit-button" do %>
-                        <i class="fas fa-edit"></i>
-                      <% end %>
-                      <%= link_to watch_path(watch), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "delete-button" do %>
-                        <i class="fas fa-trash-alt"></i>
-                      <% end %>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
     </div>
   </div>
 </div>

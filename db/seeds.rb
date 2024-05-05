@@ -36,7 +36,7 @@ watch4.photo.attach(io: file, filename: "watch4.png", content_type: "image/png")
 p "#{watch4.model} is created"
 
 ## ma demande pour réserver une montre à Fares ##
-booking2 = Booking.create!(start_date: "2024-12-01", end_date: "2024-12-03", total_price: (Watch.find_by(user_id: User.first.id).price_per_day  * (Date.parse("2024-12-03") - Date.parse("2024-12-01"))), booking_status: nil, user_id: User.second.id, watch_id: Watch.find_by(user_id: User.first.id).id)
+booking2 = Booking.create!(start_date: "2024-12-01", end_date: "2024-12-03", total_price: (Watch.find_by(user_id: User.first.id).price_per_day  * (Date.parse("2024-12-03") - Date.parse("2024-12-01"))), booking_status: 'accepted', user_id: User.second.id, watch_id: Watch.find_by(user_id: User.first.id).id)
 
 ## la demande de Fares pour me réserver une montre ##
 booking1 = Booking.create!(start_date: "2024-08-01", end_date: "2024-08-03", total_price: (Watch.find_by(user_id: User.second.id).price_per_day * (Date.parse("2024-08-03") - Date.parse("2024-08-01"))), booking_status: nil, user_id: User.first.id, watch_id: Watch.find_by(user_id: User.second.id).id)
