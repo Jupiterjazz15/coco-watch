@@ -22,18 +22,24 @@ class BookingsController < ApplicationController
 
   def accept
     @booking.accepted!
-    redirect_to dashboard_path(section: 'bookings')
+    redirect_to dashboard_path(section: 'bookings request')
   end
 
   def decline
     @booking.declined!
-    redirect_to dashboard_path(section: 'bookings')
+    redirect_to dashboard_path(section: 'bookings request')
   end
 
   def destroy
     @booking = Booking.find(params[:id])
     @booking.destroy
-    redirect_to dashboard_path(), status: :see_other
+    if @booking.user_id == current_user.id
+      redirect_to dashboard_path(section: 'bookings'), status: :see_other
+    # elsif @booking.user_id != current_user.id && @booking.booking_status == 'accepted'
+    #   redirect_to dashboard_path(section: 'watches'), status: :see_other
+    else
+      redirect_to dashboard_path(section: 'bookings request'), status: :see_other
+    end
   end
 
   private

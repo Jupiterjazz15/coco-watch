@@ -41,7 +41,7 @@ booking2 = Booking.create!(start_date: "2024-12-01", end_date: "2024-12-03", tot
 ## la demande de Fares pour me réserver une montre ##
 booking1 = Booking.create!(start_date: "2024-08-01", end_date: "2024-08-03", total_price: (Watch.find_by(user_id: User.second.id).price_per_day * (Date.parse("2024-08-03") - Date.parse("2024-08-01"))), booking_status: nil, user_id: User.first.id, watch_id: Watch.find_by(user_id: User.second.id).id)
 
-### USER 3 : Pedro et ses montres ###
+# ### USER 3 : Pedro et ses montres ###
 
 user3 = User.create!(first_name: "Pedro", last_name: "Gomes Pinto", phone_number: "345-678-9012", avatar: "https://ca.slack-edge.com/T02NE0241-U06D0LP6407-13add817550f-512", email: "pedro@test.com", password: "azerty")
 p "#{user3.first_name} is created"
@@ -56,7 +56,7 @@ file = URI.open("https://cluse.com/cdn/shop/products/1_34.jpg?v=1685543492&width
 watch6.photo.attach(io: file, filename: "watch6.jpg", content_type: "image/jpeg")
 p "#{watch6.model} is created"
 
-### USER 4 : Clothilde et ses montres ###
+# ### USER 4 : Clothilde et ses montres ###
 
 user4 = User.create!(first_name: "Clothilde", last_name: "Scache", phone_number: "456-789-0123", avatar: "https://ca.slack-edge.com/T02NE0241-U06EHGW24V6-63f7f2c8e5ec-512", email: "clothilde@test.com", password: "azerty")
 p "#{user4.first_name} is created"
